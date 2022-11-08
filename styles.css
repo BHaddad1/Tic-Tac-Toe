@@ -1,0 +1,64 @@
+body {
+    align-items: center;
+    color: #C6C6C6;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* header stylings */
+
+.main-container {
+    align-items: center;
+    width: 60vw;
+    height: 100vh;
+    display: flex; 
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+/* Side Bars Styling */
+.side-bar-left,
+.side-bar-right {
+    display: flex;
+    border: 2px solid black;
+    align-items: center;
+    height: 100vh;
+    width: 20vw;
+    justify-content: flex-start;
+    flex-direction: column; 
+}
+
+.wins-tracker {
+    text-align: center;
+    padding-top: 25%;
+}
+
+.turn-tracker {
+    text-align: center;
+    padding-top: 5%;
+}
+
+/* Grid Styling */
+.game-grid {
+    display: grid;
+    grid-gap: 0px;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    height: 60%;
+    padding-top: 7%;
+    width: 60%; 
+}
+
+.box {
+    /* height: 17vh; */
+    border: 5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: none;
+    /* height: 17vw; */
+}
