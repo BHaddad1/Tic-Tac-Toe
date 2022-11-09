@@ -36,7 +36,8 @@ body {
     flex-direction: column; 
 }
 
-.wins-tracker {
+.wins-tracker-left,
+.wins-tracker-right {
     text-align: center;
     padding-top: 25%;
 }
