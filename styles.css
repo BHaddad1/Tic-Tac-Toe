@@ -10,6 +10,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+
 /* header stylings */
 
 .main-container {
@@ -21,7 +22,9 @@ body {
     flex-wrap: wrap;
 }
 
+
 /* Side Bars Styling */
+
 .side-bar-left,
 .side-bar-right {
     display: flex;
@@ -43,7 +46,9 @@ body {
     padding-top: 5%;
 }
 
+
 /* Grid Styling */
+
 .game-grid {
     display: grid;
     grid-gap: 0px;
@@ -54,11 +59,25 @@ body {
 }
 
 .box {
-    /* height: 17vh; */
     border: 5px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: none;
-    /* height: 17vw; */
+}
+
+.remove-top-margin {
+    border-top: 5px solid transparent;
+}
+
+.remove-left-margin {
+    border-left: 5px solid transparent;
+}
+
+.remove-right-margin {
+    border-right: 5px solid transparent;
+}
+
+.remove-bottom-margin {
+    border-bottom: 5px solid transparent;
 }
