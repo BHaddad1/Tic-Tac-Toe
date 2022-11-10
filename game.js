@@ -20,12 +20,12 @@ class Game {
         this.defaultBoard = [0, 0, 0,
                             0, 0, 0,
                             0, 0, 0];
+        this.gameOver = false;
     }
      changePlayerTurn() {
         this.turn = !this.turn
     }
     trackPlayerPositions(position) {
-        console.log("trackposition");
         if(this.board[position] === 0 && this.turn){
             this.board[position] = 1;
             this.player1.currentPositions.push(position);
@@ -36,42 +36,43 @@ class Game {
             console.log(this.player2.currentPositions);
         }
     }
-    trackWhoIsNext() {
-        console.log("track who is next")
-        if (this.player1.currentPositions.length < this.player2.currentPositions) {
-            this.changePlayerTurn();
-        } else if (this.player2.currentPositions.length < this.player1.currentPositions.length){
-            this.changePlayerTurn(); 
-        }
-    }
     checkForWin() {
-        console.log("check for win")
-        for (var i = 0; i < this.possibleWins.length; i++){
-            if (this.possibleWins[i][i] === this.player1.token && this.possibleWins[i][i + 1] === this.player1.token && this.possibleWins[i][i + 2] === this.player1.token){
+        var player1Positions = [];
+        var player2Positions = [];
+        for (var i = 0; i < this.board.length; i++) {
+            if (this.board[i] === 1) {
+                player1Positions.push(i);
+            } else if (this.board[i] === 2) {
+                player2Positions.push(i);
+            }
+        }
+        for (var i = 0; i < this.possibleWins.length; i++) {
+            if (player1Positions.includes(this.possibleWins[i][0]) && player1Positions.includes(this.possibleWins[i][1]) && player1Positions.includes(this.possibleWins[i][2])) {
                 this.player1.increaseWins();
-                var score1 = player1.wins;
-                return score1;
-            } else if (this.possibleWins[i][i] === this.player2.token && this.possibleWins[i][i + 1] === this.player2.token && this.possibleWins[i][i + 2] === this.player2.token) {
-                this.player2.increaseWins();
-                var score2 = player2.wins;
-                return score2;
+                console.log("player1 wins");
+                this.gameOver = true;
+            } else if (player2Positions.includes(this.possibleWins[i][0]) && player2Positions.includes(this.possibleWins[i][1]) && player2Positions.includes(this.possibleWins[i][2])) {
+                this.player2.increaseWins(); 
+                console.log("player2 wins");
+                this.gameOver = true;
             }
         }
     }
     checkForDraw() {
         console.log("check for draw")
         for (var i = 0; i < this.possibleWins.length; i++){
-            if (this.possibleWins[i][i] !== this.player1.token && this.possibleWins[i][i + 1] !== this.player1.token && this.possibleWins[i][i + 2] !== this.player1.token){
+            if (this.possibleWins[i][i] !== this.player1.id && this.possibleWins[i][i + 1] !== this.player1.id && this.possibleWins[i][i + 2] !== this.player1.id){
                 this.draw = true;
-            } else if (this.possibleWins[i][i] !== this.player2.token && this.possibleWins[i][i + 1] !== this.player2.token && this.possibleWins[i][i + 2] !== this.player2.token){
+                return true;
+            } else if (this.possibleWins[i][i] !== this.player2.id && this.possibleWins[i][i + 1] !== this.player2.id && this.possibleWins[i][i + 2] !== this.player2.id){
                 this.draw = true;
+                return true;
             }
         }
     }
     resetBoard() {
         console.log("reset board")
         this.board = this.defaultBoard;
-        this.changePlayerTurn();
         this.player1.currentPositions = [];
         this.player2.currentPositions = [];
     }
