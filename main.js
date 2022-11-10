@@ -71,24 +71,27 @@ function keepTrackOfPositions(position){
 function checkForWinOnDOM() {
     newGame.checkForWin();
     updateScores();
+    // re-enable the divs
 
 }
 
-// function clearBoard(boxes) {
-//     for (var i = 0; i < 9; i++) {
-//         if (boxes[i].innerText === newGame.player1.token || boxes[i].innerText === newGame.player2.token){
-//             newGame.board = newGame.defaultBoard;
-//             boxes[i].innerText = ""
-//         }
-//     }
-// }
+function clearBoard(boxes) {
+    for (var i = 0; i < 9; i++) {
+        if (boxes[i].innerText === newGame.player1.token || boxes[i].innerText === newGame.player2.token){
+            newGame.board = newGame.defaultBoard;
+            boxes[i].innerText = ""
+        }
+    }
+}
 
 function updateScores() {
     if (newGame.gameOver === true && newGame.player1.didWin === true) {
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won!`
+        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
+        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         turnTracker.innerText = `Chesty won!`
     } else if (newGame.gameOver === true && newGame.player2.didWin === true) {
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won!`
+        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
+        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         turnTracker.innerText = `Izzy won!`
     }
     // if game is over 
