@@ -3,7 +3,8 @@ class Player {
         this.token = token;
         this.wins = 0;
         this.currentPositions = [];
-        this.id = id
+        this.id = id;
+        this.position = null;
     }
     increaseWins() {
         this.wins += 1;

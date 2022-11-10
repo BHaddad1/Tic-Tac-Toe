@@ -25,7 +25,63 @@ var lowerRightBox = document.querySelector('#ninth-box');
 var board = document.querySelector('.game-grid');
 
 //---------------------------Event Listeners------------------------//
-upperLeftBox.addEventListener('click', updateToken(upperLeftBox));
+
+upperLeftBox.addEventListener('click',function() {
+    updateToken(upperLeftBox);
+    preventChangingTokens(upperLeftBox); 
+    changeTurn();
+    keepTrackOfPositions();
+    updateBoard();
+});
+upperMiddleBox.addEventListener('click', function() {
+    updateToken(upperMiddleBox);
+    preventChangingTokens(upperMiddleBox);
+    changeTurn();
+    keepTrackOfPositions();
+});
+upperRightBox.addEventListener('click', function() {
+    updateToken(upperRightBox);
+    preventChangingTokens(upperRightBox);
+    changeTurn(); 
+    keepTrackOfPositions();
+})
+middleLeftBox.addEventListener('click', function() {
+    updateToken(middleLeftBox);
+    preventChangingTokens(middleLeftBox);
+    changeTurn();
+    keepTrackOfPositions();
+})
+middleBox.addEventListener('click', function() {
+    updateToken(middleBox);
+    preventChangingTokens(middleBox);
+    changeTurn();
+    keepTrackOfPositions();
+});
+middleRightBox.addEventListener('click', function() {
+    updateToken(middleRightBox);
+    preventChangingTokens(middleRightBox);
+    changeTurn();
+    keepTrackOfPositions();
+})
+lowerLeftBox.addEventListener('click', function() {
+    updateToken(lowerLeftBox);
+    preventChangingTokens(lowerLeftBox);
+    changeTurn();
+    keepTrackOfPositions();
+});
+lowerMiddleBox.addEventListener('click', function() {
+    updateToken(lowerMiddleBox);
+    preventChangingTokens(lowerMiddleBox);
+    changeTurn();
+    keepTrackOfPositions();
+})
+lowerRightBox.addEventListener('click', function() {
+    updateToken(lowerRightBox);
+    preventChangingTokens(lowerRightBox);
+    changeTurn();
+    keepTrackOfPositions();
+})
+
 
 
 //--------------------------Data Model functions---------------------//
@@ -47,13 +103,47 @@ function determineTurn() {
 function updateToken(box) {
     if (newGame.turn === true) {
        box.innerText = newGame.player1.token;
-    } else if(newGame.turn === false) {
+      } else if(newGame.turn === false) {
         box.innerText = newGame.player2.token;
     }
 }
 
-function disableBoxesThatAreFilled() {
-    // if boxes contains tokens
-    // then they are no longer clickable
-    // gameboard.classList.add(disabled)
+function preventChangingTokens(box){ 
+    if (box.innerText === player1.token) {
+        box.classList.add('disabled')
+    } else if (box.innerText === player2.token) {
+        box.classList.add('disabled')
+    }
 }
+
+function changeTurn() {
+    newGame.changePlayerTurn();
+}
+
+function updateBoard(event) {
+    console.log(event);
+    for (var i = 0; i < newGame.board.length; i++) {
+        // if (newGame.board[i]
+    }
+}
+
+function keepTrackOfPositions(){
+    if (newGame.turn === true) {
+        newGame.trackPlayerPositions()
+    } else if (newGame.turn === false) {
+        newGame.trackPlayerPositions()
+    }
+}
+
+// trackPlayerPositions(position) {
+//     console.log("trackposition");
+//     if (this.board[position] === 0){
+//         this.board[position] = this.player1.id;
+//         this.player1.currentPositions.push(position);
+//    } else if (this.board[position] === 0) {
+//         this.baord[position] = this.player2.id;
+//         this.player2.currentPositions.push(position);
+//     } 
+// }
+
+//----------------------------------DATA MODEL FUNCTIONS----------------------//
