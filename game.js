@@ -49,12 +49,10 @@ class Game {
         for (var i = 0; i < this.possibleWins.length; i++) {
             if (player1Positions.includes(this.possibleWins[i][0]) && player1Positions.includes(this.possibleWins[i][1]) && player1Positions.includes(this.possibleWins[i][2])) {
                 this.player1.increaseWins();
-                this.resetBoard();
                 console.log("player1 wins");
                 this.gameOver = true;
             } else if (player2Positions.includes(this.possibleWins[i][0]) && player2Positions.includes(this.possibleWins[i][1]) && player2Positions.includes(this.possibleWins[i][2])) {
                 this.player2.increaseWins(); 
-                this.resetBoard();
                 console.log("player2 wins");
                 this.gameOver = true;
             }

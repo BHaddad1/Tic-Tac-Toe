@@ -32,11 +32,10 @@ board.addEventListener('click', function(event) {
     updateToken(event);
     newGame.changePlayerTurn();
     preventChangingTokens(event);
-    newGame.checkForWin();
-    updateScores();
-    newGame.checkForDraw();
-    updateBanner();
-    clearBoard();
+    checkForWinOnDOM();
+    // newGame.checkForDraw();
+    // updateBanner();
+    // clearBoard();
 });
 
 //------------------------DOM Functions-----------------------//
@@ -69,35 +68,28 @@ function keepTrackOfPositions(position){
    newGame.trackPlayerPositions(position);
 }
 
-// trackPlayerPositions(position) {
-//     console.log("trackposition");
-//     if (this.board[position] === 0){
-//         this.board[position] = this.player1.id;
-//         this.player1.currentPositions.push(position);
-//    } else if (this.board[position] === 0) {
-//         this.baord[position] = this.player2.id;
-//         this.player2.currentPositions.push(position);
-//     } 
-// }
 function checkForWinOnDOM() {
     newGame.checkForWin();
-    // time out for win;
+    updateScores();
+
 }
 
-function clearBoard(boxes) {
-    for (var i = 0; i < 9; i++) {
-        if (boxes[i].innerText === newGame.player1.token || boxes[i].innerText === newGame.player2.token){
-            newGame.board = newGame.defaultBoard;
-            boxes[i].innerText = ""
-        }
-    }
-}
+// function clearBoard(boxes) {
+//     for (var i = 0; i < 9; i++) {
+//         if (boxes[i].innerText === newGame.player1.token || boxes[i].innerText === newGame.player2.token){
+//             newGame.board = newGame.defaultBoard;
+//             boxes[i].innerText = ""
+//         }
+//     }
+// }
 
 function updateScores() {
     if (newGame.gameOver === true && newGame.player1.didWin === true) {
-        winsTrackerLeft.innerText = newGame.player1.wins
+        winsTrackerLeft.innerText = `${newGame.player1.wins} games won!`
+        turnTracker.innerText = `Chesty won!`
     } else if (newGame.gameOver === true && newGame.player2.didWin === true) {
-        winsTrackerRight.innerText = newGame.player2.wins
+        winsTrackerRight.innerText = `${newGame.player2.wins} games won!`
+        turnTracker.innerText = `Izzy won!`
     }
     // if game is over 
     // look at players scores 
