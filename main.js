@@ -29,59 +29,66 @@ var board = document.querySelector('.game-grid');
 upperLeftBox.addEventListener('click',function() {
     updateToken(upperLeftBox);
     preventChangingTokens(upperLeftBox); 
-    changeTurn();
     keepTrackOfPositions(0);
-   
+    checkForWinOnDOM();
+    changeTurn();
 });
 upperMiddleBox.addEventListener('click', function() {
     updateToken(upperMiddleBox);
     preventChangingTokens(upperMiddleBox);
-    changeTurn();
     keepTrackOfPositions(1);
+    checkForWinOnDOM();
+    changeTurn();
 });
 upperRightBox.addEventListener('click', function() {
     updateToken(upperRightBox);
     preventChangingTokens(upperRightBox);
-    changeTurn(); 
     keepTrackOfPositions(2);
+    checkForWinOnDOM();
+    changeTurn(); 
 })
 middleLeftBox.addEventListener('click', function() {
     updateToken(middleLeftBox);
     preventChangingTokens(middleLeftBox);
-    changeTurn();
     keepTrackOfPositions(3);
+    checkForWinOnDOM();
+    changeTurn();
 })
 middleBox.addEventListener('click', function() {
     updateToken(middleBox);
     preventChangingTokens(middleBox);
-    changeTurn();
     keepTrackOfPositions(4);
+    checkForWinOnDOM();
+    changeTurn();
 });
 middleRightBox.addEventListener('click', function() {
     updateToken(middleRightBox);
     preventChangingTokens(middleRightBox);
-    changeTurn();
     keepTrackOfPositions(5);
+    checkForWinOnDOM();
+    changeTurn();
 })
 lowerLeftBox.addEventListener('click', function() {
     updateToken(lowerLeftBox);
     preventChangingTokens(lowerLeftBox);
-    changeTurn();
     keepTrackOfPositions(6);
+    checkForWinOnDOM();
+    changeTurn();
 });
 lowerMiddleBox.addEventListener('click', function() {
     updateToken(lowerMiddleBox);
     preventChangingTokens(lowerMiddleBox);
-    changeTurn();
     keepTrackOfPositions(7);
+    checkForWinOnDOM();
+    changeTurn();
 })
 lowerRightBox.addEventListener('click', function() {
     updateToken(lowerRightBox);
     preventChangingTokens(lowerRightBox);
-    changeTurn();
     keepTrackOfPositions(8);
+    checkForWinOnDOM();
+    changeTurn();
 })
-
 
 
 //--------------------------Data Model functions---------------------//
@@ -111,10 +118,8 @@ function updateToken(box) {
 function preventChangingTokens(box){ 
     if (box.innerText === player1.token) {
         box.classList.add('disabled')
-        box.disabled = true;
     } else if (box.innerText === player2.token) {
         box.classList.add('disabled')
-        box.disabled = true;
     }
 }
 
@@ -143,5 +148,14 @@ function keepTrackOfPositions(position){
 //         this.player2.currentPositions.push(position);
 //     } 
 // }
+function checkForWinOnDOM() {
+    newGame.checkForWin();
+}
 
+function clearBoard() {
+    
+}
+// reset board function for DOM 
+// clear out the pieces
+// 
 //----------------------------------DATA MODEL FUNCTIONS----------------------//
