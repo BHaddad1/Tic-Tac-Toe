@@ -38,11 +38,13 @@ body {
 
 .wins-tracker-left,
 .wins-tracker-right {
+    font-size: 25px;
     text-align: center;
     padding-top: 25%;
 }
 
 .turn-tracker {
+    font-size: 40px;
     text-align: center;
     padding-top: 5%;
 }
