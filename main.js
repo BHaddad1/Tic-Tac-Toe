@@ -67,15 +67,20 @@ function reenableBoxes(event) {
 };
 
 function checkForWinOrDraw() {
-    newGame.checkForWin();
-    if (newGame.checkForWin() === true) {
+     if (newGame.checkForWin() === true) {
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         turnTracker.innerText = `Chesty won!`
+        for (var i = 0; i < 9; i++) {
+            boxes[i].innerText = ""
+        }
     } else if (newGame.checkForWin() === false) {
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         turnTracker.innerText = `Izzy won!`
+        for (var i = 0; i < 9; i++) {
+            boxes[i].innerText = ""
+        }
     } else if (newGame.checkForDraw() === true) {
         turnTracker.innerText = `It's a draw!`
     } 
