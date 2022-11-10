@@ -51,38 +51,37 @@ class Game {
                 this.player1.increaseWins();
                 console.log("player1 wins");
                 this.gameOver = true;
-            } else if (player2Positions.includes(this.possibleWins[i][0]) && player2Positions.includes(this.possibleWins[i][1]) && player2Positions.includes(this.possibleWins[i][2])) {
+                this.resetBoard();
+            }  else if (player2Positions.includes(this.possibleWins[i][0]) && player2Positions.includes(this.possibleWins[i][1]) && player2Positions.includes(this.possibleWins[i][2])) {
                 this.player2.increaseWins(); 
                 console.log("player2 wins");
                 this.gameOver = true;
-            }
+                this.resetBoard();
+            } 
         }
     }
     checkForDraw() {
         console.log("check for draw")
-        for (var i = 0; i < this.possibleWins.length; i++){
-            if (this.possibleWins[i][i] !== this.player1.id && this.possibleWins[i][i + 1] !== this.player1.id && this.possibleWins[i][i + 2] !== this.player1.id){
-                this.draw = true;
-                return true;
-            } else if (this.possibleWins[i][i] !== this.player2.id && this.possibleWins[i][i + 1] !== this.player2.id && this.possibleWins[i][i + 2] !== this.player2.id){
-                this.draw = true;
-                return true;
-            }
+        for (var i = 0; i < this.board.length; i++){
+            if (this.board[i] === 0) {
+                this.draw = false;
+                this.gameOver = false;
+                console.log("NOT YET BITCH")
+                return false;
+            } 
         }
-    }
+        this.draw = true;
+        this.gameOver = true;
+        console.log("ITS A DRAW DUMBASS")
+        // this.resetBoard();
+        return true;
+    } 
     resetBoard() {
         console.log("reset board")
-        this.board = this.defaultBoard;
-        this.player1.currentPositions = [];
-        this.player2.currentPositions = [];
-    }
-    playGame() {
-        console.log("play game")
-        this.changePlayerTurn();
-        this.trackPositions();
-        this.trackWhoIsNext();
-        this.checkForWin();
-        this.checkForDraw();
-        this.resetBoard(); 
+        if (this.gameOver === true || this.draw === true) {
+            this.board = this.defaultBoard;
+            this.player1.currentPositions = [];
+            this.player2.currentPositions = [];
+        }
     }
 }

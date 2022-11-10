@@ -28,14 +28,14 @@ var board = document.querySelector('.game-grid');
 
 //---------------------------Event Listeners------------------------//
 board.addEventListener('click', function(event) {
-    keepTrackOfPositions(event.target.id);
+    newGame.trackPlayerPositions(event.target.id);
     updateToken(event);
     newGame.changePlayerTurn();
     preventChangingTokens(event);
-    checkForWinOnDOM();
-    // newGame.checkForDraw();
-    // updateBanner();
-    // clearBoard();
+    checkForWinOrDraw();
+    reenableBoxes();
+    // updateScores();
+    clearBoard();
 });
 
 //------------------------DOM Functions-----------------------//
@@ -60,50 +60,35 @@ function preventChangingTokens(event){
     }
 };
 
-function changeTurn() {
-    newGame.changePlayerTurn();
-}
-
-function keepTrackOfPositions(position){
-   newGame.trackPlayerPositions(position);
-}
-
-function checkForWinOnDOM() {
-    newGame.checkForWin();
-    updateScores();
-
-}
-
-// function clearBoard(boxes) {
-//     for (var i = 0; i < 9; i++) {
-//         if (boxes[i].innerText === newGame.player1.token || boxes[i].innerText === newGame.player2.token){
-//             newGame.board = newGame.defaultBoard;
-//             boxes[i].innerText = ""
-//         }
-//     }
-// }
-
-function updateScores() {
-    if (newGame.gameOver === true && newGame.player1.didWin === true) {
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won!`
-        turnTracker.innerText = `Chesty won!`
-    } else if (newGame.gameOver === true && newGame.player2.didWin === true) {
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won!`
-        turnTracker.innerText = `Izzy won!`
+function reenableBoxes(event) {
+    for (var i = 0; i < 9; i++){
+        boxes[i].classList.remove('disabled')
     }
-    // if game is over 
-    // look at players scores 
-    // banner's innertext should be "Chesty won!"
-    // or if player2 won 
-    // banner's innerText should be "Izzy won!"  
-    // reset board
-    // if there is a draw and 
-    // banner's innerText should be "There's a draw!"
-    // reset board
-    // start with the last person who went first
-    //; 
 };
+
+function checkForWinOrDraw() {
+    newGame.checkForWin();
+    if (newGame.checkForWin() === true) {
+        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
+        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
+        turnTracker.innerText = `Chesty won!`
+    } else if (newGame.checkForWin() === false) {
+        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
+        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
+        turnTracker.innerText = `Izzy won!`
+    } else if (newGame.checkForDraw() === true) {
+        turnTracker.innerText = `It's a draw!`
+    } 
+};
+
 // reset board function for DOM 
+// setTimeout()
 // clear out the pieces
 // 
+function clearBoard(boxes) {
+    if (newGame.checkForDraw() === true || newGame.checkForWin === true || newGame.checkForWin === false) {
+        var resetBoardFunction = setTimeout(newGame.resetBoard, 1000);
+    }
+};
+
 //----------------------------------DATA MODEL FUNCTIONS----------------------//
