@@ -31,8 +31,7 @@ upperLeftBox.addEventListener('click',function() {
     preventChangingTokens(upperLeftBox); 
     changeTurn();
     keepTrackOfPositions(0);
-    //index position 0
-    // bring this info into keepTrack
+   
 });
 upperMiddleBox.addEventListener('click', function() {
     updateToken(upperMiddleBox);
@@ -112,8 +111,10 @@ function updateToken(box) {
 function preventChangingTokens(box){ 
     if (box.innerText === player1.token) {
         box.classList.add('disabled')
+        box.disabled = true;
     } else if (box.innerText === player2.token) {
         box.classList.add('disabled')
+        box.disabled = true;
     }
 }
 
