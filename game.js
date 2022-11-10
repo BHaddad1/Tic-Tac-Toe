@@ -20,6 +20,7 @@ class Game {
         this.defaultBoard = [0, 0, 0,
                             0, 0, 0,
                             0, 0, 0];
+        this.gameOver = false;
     }
      changePlayerTurn() {
         this.turn = !this.turn
@@ -45,17 +46,17 @@ class Game {
                 player2Positions.push(i);
             }
         }
-        console.log("player 1", player1Positions);
-        console.log("player 2", player2Positions);
         for (var i = 0; i < this.possibleWins.length; i++) {
             if (player1Positions.includes(this.possibleWins[i][0]) && player1Positions.includes(this.possibleWins[i][1]) && player1Positions.includes(this.possibleWins[i][2])) {
                 this.player1.increaseWins();
                 this.resetBoard();
                 console.log("player1 wins");
+                this.gameOver = true;
             } else if (player2Positions.includes(this.possibleWins[i][0]) && player2Positions.includes(this.possibleWins[i][1]) && player2Positions.includes(this.possibleWins[i][2])) {
                 this.player2.increaseWins(); 
                 this.resetBoard();
                 console.log("player2 wins");
+                this.gameOver = true;
             }
         }
     }
@@ -64,15 +65,16 @@ class Game {
         for (var i = 0; i < this.possibleWins.length; i++){
             if (this.possibleWins[i][i] !== this.player1.id && this.possibleWins[i][i + 1] !== this.player1.id && this.possibleWins[i][i + 2] !== this.player1.id){
                 this.draw = true;
+                return true;
             } else if (this.possibleWins[i][i] !== this.player2.id && this.possibleWins[i][i + 1] !== this.player2.id && this.possibleWins[i][i + 2] !== this.player2.id){
                 this.draw = true;
+                return true;
             }
         }
     }
     resetBoard() {
         console.log("reset board")
         this.board = this.defaultBoard;
-        this.changePlayerTurn();
         this.player1.currentPositions = [];
         this.player2.currentPositions = [];
     }

@@ -7,12 +7,14 @@
 
 // -----------------------------Global Variables----------------------//
 var newGame = new Game ();
-var player1 = newGame.player1
-var player2 = newGame.player2
+var player1 = newGame.player1;
+var player2 = newGame.player2;
+var currentPlayer;
 //.........................Query Selectors......................
 var winsTrackerLeft = document.querySelector('.wins-tracker-left');
 var winsTrackerRight = document.querySelector('.wins-tracker-right');
 var turnTracker = document.querySelector('.turn-tracker');
+var boxes = document.querySelectorAll('.box');
 var upperLeftBox = document.querySelector('#first-box');
 var upperMiddleBox = document.querySelector('#second-box');
 var upperRightBox = document.querySelector('#third-box');
@@ -25,114 +27,43 @@ var lowerRightBox = document.querySelector('#ninth-box');
 var board = document.querySelector('.game-grid');
 
 //---------------------------Event Listeners------------------------//
-
-upperLeftBox.addEventListener('click',function() {
-    updateToken(upperLeftBox);
-    preventChangingTokens(upperLeftBox); 
-    keepTrackOfPositions(0);
-    checkForWinOnDOM();
-    changeTurn();
+board.addEventListener('click', function(event) {
+    keepTrackOfPositions(event.target.id);
+    updateToken(event);
+    newGame.changePlayerTurn();
+    preventChangingTokens(event);
+    newGame.checkForWin();
+    updateScores();
+    newGame.checkForDraw();
+    updateBanner();
+    clearBoard();
 });
-upperMiddleBox.addEventListener('click', function() {
-    updateToken(upperMiddleBox);
-    preventChangingTokens(upperMiddleBox);
-    keepTrackOfPositions(1);
-    checkForWinOnDOM();
-    changeTurn();
-});
-upperRightBox.addEventListener('click', function() {
-    updateToken(upperRightBox);
-    preventChangingTokens(upperRightBox);
-    keepTrackOfPositions(2);
-    checkForWinOnDOM();
-    changeTurn(); 
-})
-middleLeftBox.addEventListener('click', function() {
-    updateToken(middleLeftBox);
-    preventChangingTokens(middleLeftBox);
-    keepTrackOfPositions(3);
-    checkForWinOnDOM();
-    changeTurn();
-})
-middleBox.addEventListener('click', function() {
-    updateToken(middleBox);
-    preventChangingTokens(middleBox);
-    keepTrackOfPositions(4);
-    checkForWinOnDOM();
-    changeTurn();
-});
-middleRightBox.addEventListener('click', function() {
-    updateToken(middleRightBox);
-    preventChangingTokens(middleRightBox);
-    keepTrackOfPositions(5);
-    checkForWinOnDOM();
-    changeTurn();
-})
-lowerLeftBox.addEventListener('click', function() {
-    updateToken(lowerLeftBox);
-    preventChangingTokens(lowerLeftBox);
-    keepTrackOfPositions(6);
-    checkForWinOnDOM();
-    changeTurn();
-});
-lowerMiddleBox.addEventListener('click', function() {
-    updateToken(lowerMiddleBox);
-    preventChangingTokens(lowerMiddleBox);
-    keepTrackOfPositions(7);
-    checkForWinOnDOM();
-    changeTurn();
-})
-lowerRightBox.addEventListener('click', function() {
-    updateToken(lowerRightBox);
-    preventChangingTokens(lowerRightBox);
-    keepTrackOfPositions(8);
-    checkForWinOnDOM();
-    changeTurn();
-})
-
-
-//--------------------------Data Model functions---------------------//
-function testDOM() {
-    console.log("hello");
-}
-
-
-function clearBoard(){ 
-  board = newGame.resetBoard;
-}
-
-function determineTurn() {
-    newGame.changePlayerTurn
-}
-
 
 //------------------------DOM Functions-----------------------//
-function updateToken(box) {
-    if (newGame.turn === true) {
-       box.innerText = newGame.player1.token;
-      } else if(newGame.turn === false) {
-        box.innerText = newGame.player2.token;
-    }
-}
 
-function preventChangingTokens(box){ 
-    if (box.innerText === player1.token) {
-        box.classList.add('disabled')
-    } else if (box.innerText === player2.token) {
-        box.classList.add('disabled')
+function updateToken(event) {
+     for (var i = 0; i < 9; i++) {
+        if (newGame.board[i] === 0) {
+            boxes[i].innerText = "";
+        } else if (newGame.board[i] === 1) {
+            boxes[i].innerText = newGame.player1.token;
+        } else if (newGame.board[i] === 2) {
+            boxes[i].innerText = newGame.player2.token;
+        }
+     }
+};
+
+function preventChangingTokens(event){ 
+    if (event.target.innerText === player1.token) {
+        event.target.classList.add('disabled')
+    } else if (event.target.innerText === player2.token) {
+        event.target.classList.add('disabled')
     }
-}
+};
 
 function changeTurn() {
     newGame.changePlayerTurn();
 }
-
-// function updateBoard(event) {
-//     console.log(event);
-//     for (var i = 0; i < newGame.board.length; i++) {
-//         // if (newGame.board[i]
-//     }
-// }
 
 function keepTrackOfPositions(position){
    newGame.trackPlayerPositions(position);
@@ -150,11 +81,36 @@ function keepTrackOfPositions(position){
 // }
 function checkForWinOnDOM() {
     newGame.checkForWin();
+    // time out for win;
 }
 
-function clearBoard() {
-    
+function clearBoard(boxes) {
+    for (var i = 0; i < 9; i++) {
+        if (boxes[i].innerText === newGame.player1.token || boxes[i].innerText === newGame.player2.token){
+            newGame.board = newGame.defaultBoard;
+            boxes[i].innerText = ""
+        }
+    }
 }
+
+function updateScores() {
+    if (newGame.gameOver === true && newGame.player1.didWin === true) {
+        winsTrackerLeft.innerText = newGame.player1.wins
+    } else if (newGame.gameOver === true && newGame.player2.didWin === true) {
+        winsTrackerRight.innerText = newGame.player2.wins
+    }
+    // if game is over 
+    // look at players scores 
+    // banner's innertext should be "Chesty won!"
+    // or if player2 won 
+    // banner's innerText should be "Izzy won!"  
+    // reset board
+    // if there is a draw and 
+    // banner's innerText should be "There's a draw!"
+    // reset board
+    // start with the last person who went first
+    //; 
+};
 // reset board function for DOM 
 // clear out the pieces
 // 
