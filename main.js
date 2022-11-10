@@ -30,56 +30,57 @@ upperLeftBox.addEventListener('click',function() {
     updateToken(upperLeftBox);
     preventChangingTokens(upperLeftBox); 
     changeTurn();
-    keepTrackOfPositions();
-    updateBoard();
+    keepTrackOfPositions(0);
+    //index position 0
+    // bring this info into keepTrack
 });
 upperMiddleBox.addEventListener('click', function() {
     updateToken(upperMiddleBox);
     preventChangingTokens(upperMiddleBox);
     changeTurn();
-    keepTrackOfPositions();
+    keepTrackOfPositions(1);
 });
 upperRightBox.addEventListener('click', function() {
     updateToken(upperRightBox);
     preventChangingTokens(upperRightBox);
     changeTurn(); 
-    keepTrackOfPositions();
+    keepTrackOfPositions(2);
 })
 middleLeftBox.addEventListener('click', function() {
     updateToken(middleLeftBox);
     preventChangingTokens(middleLeftBox);
     changeTurn();
-    keepTrackOfPositions();
+    keepTrackOfPositions(3);
 })
 middleBox.addEventListener('click', function() {
     updateToken(middleBox);
     preventChangingTokens(middleBox);
     changeTurn();
-    keepTrackOfPositions();
+    keepTrackOfPositions(4);
 });
 middleRightBox.addEventListener('click', function() {
     updateToken(middleRightBox);
     preventChangingTokens(middleRightBox);
     changeTurn();
-    keepTrackOfPositions();
+    keepTrackOfPositions(5);
 })
 lowerLeftBox.addEventListener('click', function() {
     updateToken(lowerLeftBox);
     preventChangingTokens(lowerLeftBox);
     changeTurn();
-    keepTrackOfPositions();
+    keepTrackOfPositions(6);
 });
 lowerMiddleBox.addEventListener('click', function() {
     updateToken(lowerMiddleBox);
     preventChangingTokens(lowerMiddleBox);
     changeTurn();
-    keepTrackOfPositions();
+    keepTrackOfPositions(7);
 })
 lowerRightBox.addEventListener('click', function() {
     updateToken(lowerRightBox);
     preventChangingTokens(lowerRightBox);
     changeTurn();
-    keepTrackOfPositions();
+    keepTrackOfPositions(8);
 })
 
 
@@ -120,19 +121,15 @@ function changeTurn() {
     newGame.changePlayerTurn();
 }
 
-function updateBoard(event) {
-    console.log(event);
-    for (var i = 0; i < newGame.board.length; i++) {
-        // if (newGame.board[i]
-    }
-}
+// function updateBoard(event) {
+//     console.log(event);
+//     for (var i = 0; i < newGame.board.length; i++) {
+//         // if (newGame.board[i]
+//     }
+// }
 
-function keepTrackOfPositions(){
-    if (newGame.turn === true) {
-        newGame.trackPlayerPositions()
-    } else if (newGame.turn === false) {
-        newGame.trackPlayerPositions()
-    }
+function keepTrackOfPositions(position){
+   newGame.trackPlayerPositions(position);
 }
 
 // trackPlayerPositions(position) {

@@ -3,7 +3,6 @@ class Game {
         this.player1 = new Player("🐈", 1);
         this.player2 = new Player("🐈‍⬛", 2);
         this.turn = true;
-        this.nextTurn = this.player1;
         this.draw = false;
         this.board = [0, 0, 0,
                      0, 0, 0,
@@ -23,40 +22,20 @@ class Game {
                             0, 0, 0];
     }
      changePlayerTurn() {
-        if (this.nextTurn === player1){
-            this.turn = false;
-            this.nextTurn = player2;
-        } else {
-            this.nextTurn = player1; 
-            this.turn = true;
-        }
-    }
-    updateBoard() {
-        for (var i = 0; i < this.board.length; i++) {
-            //the positions in the array should equal the players ids 
-            //if the positions within the array are equal to the players tokens, 
-            // 
-            // var updatedBoard = 
-            //board with the current positions fileldo out
-            // return updatedBoard
-        }
+        this.turn = !this.turn
     }
     trackPlayerPositions(position) {
         console.log("trackposition");
-        var position;
-        for (var i = 0; i < this.board.length; i++){
-            var position = this.board[i]
-        }
-         if(this.board[position] === 0){
-                this.board[position] = this.player1.id;
-                var position = this.board[0]
-                this.player1.currentPositions.push(position);
-            } else if (this.board[position] === 0) {
-                this.board[position] = this.player2.id;
-                this.player2.currentPositions.push(position);
-            } console.log(this.player1.currentPositions);
+        if(this.board[position] === 0 && this.turn){
+            this.board[position] = 1;
+            this.player1.currentPositions.push(position);
+            console.log(this.player1.currentPositions);
+        } else if (this.board[position] === 0 && !this.turn){
+            this.board[position] = 2;
+            this.player2.currentPositions.push(position);
             console.log(this.player2.currentPositions);
         }
+    }
     trackWhoIsNext() {
         console.log("track who is next")
         if (this.player1.currentPositions.length < this.player2.currentPositions) {
@@ -98,7 +77,6 @@ class Game {
     }
     playGame() {
         console.log("play game")
-        this.nextTurn = this.player1;
         this.changePlayerTurn();
         this.trackPositions();
         this.trackWhoIsNext();
