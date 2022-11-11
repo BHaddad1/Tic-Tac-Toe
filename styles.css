@@ -1,6 +1,9 @@
 body {
     align-items: center;
-    color: #C6C6C6;
+    background-image: url(IMG_1312.jpeg);
+    background-repeat: no-repeat;
+    background-size: 2000px;
+    color: solid white;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -9,7 +12,6 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
-
 
 /* header stylings */
 
@@ -28,7 +30,7 @@ body {
 .side-bar-left,
 .side-bar-right {
     display: flex;
-    border: 2px solid black;
+    border: 2px solid white;
     align-items: center;
     height: 100vh;
     width: 20vw;
@@ -38,12 +40,14 @@ body {
 
 .wins-tracker-left,
 .wins-tracker-right {
+    color: white;
     font-size: 25px;
     text-align: center;
     padding-top: 25%;
 }
 
 .turn-tracker {
+    color: white;
     font-size: 40px;
     text-align: center;
     padding-top: 5%;
@@ -54,6 +58,7 @@ body {
 
 .game-grid {
     display: grid;
+    font-size: 50px;
     grid-gap: 0px;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
     height: 60%;
@@ -62,7 +67,7 @@ body {
 }
 
 .box {
-    border: 5px solid black;
+    border: 5px solid white;
     display: flex;
     align-items: center;
     justify-content: center;

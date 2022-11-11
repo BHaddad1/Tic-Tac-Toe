@@ -53,12 +53,14 @@ class Game {
                 console.log("player1 wins");
                 this.gameOver = true;
                 this.resetBoard();
+                console.log(this.board);
                 return true;
             }  else if (player2Positions.includes(this.possibleWins[i][0]) && player2Positions.includes(this.possibleWins[i][1]) && player2Positions.includes(this.possibleWins[i][2])) {
                 this.player2.increaseWins(); 
                 console.log("player2 wins");
                 this.gameOver = true;
                 this.resetBoard();
+                console.log(this.board);
                 return false;
             } 
         }
@@ -81,12 +83,13 @@ class Game {
     } 
     resetBoard() {
         console.log("reset board")
-        if (this.gameOver === true || this.draw === true) {
             this.board = [0, 0, 0,
                          0, 0, 0,
                          0, 0, 0];
             this.player1.currentPositions = [];
             this.player2.currentPositions = [];
+            for (var i = 0; i < 9; i++){
+                boxes[i].innerText = ""
         }
     }
 }
