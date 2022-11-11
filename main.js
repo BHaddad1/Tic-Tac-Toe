@@ -26,6 +26,7 @@ var lowerLeftBox = document.querySelector('#seventh-box');
 var lowerMiddleBox = document.querySelector('#eighth-box');
 var lowerRightBox = document.querySelector('#ninth-box');
 var board = document.querySelector('.game-grid');
+var buttons = document.querySelectorAll('button')
 
 //---------------------------Event Listeners------------------------//
 board.addEventListener('click', function(event) {
