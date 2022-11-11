@@ -35,7 +35,7 @@ board.addEventListener('click', function(event) {
     checkForWinOrDraw();
     reenableBoxes();
     // updateScores();
-    clearBoard();
+    // clearBoard();
 });
 
 //------------------------DOM Functions-----------------------//
@@ -88,11 +88,11 @@ function checkForWinOrDraw() {
 
 function clearBoard() {
     if (newGame.gameOver === true) {
+        var resetBoardFunction = setTimeout(function() {
+        newGame.resetBoard()}, 3000);
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
         }
-        var resetBoardFunction = setTimeout(function() {
-        newGame.resetBoard()}, 3000);
     }
 };
 
