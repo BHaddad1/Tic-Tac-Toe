@@ -10,6 +10,7 @@ var newGame = new Game ();
 var player1 = newGame.player1;
 var player2 = newGame.player2;
 var currentPlayer;
+var setTime
 //.........................Query Selectors......................
 var winsTrackerLeft = document.querySelector('.wins-tracker-left');
 var winsTrackerRight = document.querySelector('.wins-tracker-right');
@@ -34,9 +35,7 @@ board.addEventListener('click', function(event) {
     preventChangingTokens(event);
     checkForWinOrDraw();
     reenableBoxes();
-    // updateScores();
-    // clearBoard();
-});
+ });
 
 //------------------------DOM Functions-----------------------//
 
@@ -67,13 +66,17 @@ function reenableBoxes(event) {
 };
 
 function checkForWinOrDraw() {
-     if (newGame.checkForWin() === true) {
+    if (newGame.checkForDraw() === true) {
+        turnTracker.innerText = `It's a draw!`
+        setTimeout(newGame.resetBoard, 3000)
+    } else if (newGame.checkForWin() === true) {
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         turnTracker.innerText = `Chesty won!`
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = ""
         }
+       setTimeout(newGame.resetBoard, 3000)
     } else if (newGame.checkForWin() === false) {
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
@@ -81,15 +84,14 @@ function checkForWinOrDraw() {
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = ""
         }
-    } else if (newGame.checkForDraw() === true) {
-        turnTracker.innerText = `It's a draw!`
-    } 
+        setTimeout(newGame.resetBoard, 3000)
+    }
 };
 
-function clearBoard() {
+function clearDom() {
     if (newGame.gameOver === true) {
-        var resetBoardFunction = setTimeout(function() {
-        newGame.resetBoard()}, 3000);
+        // var resetBoardFunction = setTimeout(function() {
+        // newGame.resetBoard()}, 3000);
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
         }
