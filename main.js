@@ -26,7 +26,7 @@ var lowerLeftBox = document.querySelector('#seventh-box');
 var lowerMiddleBox = document.querySelector('#eighth-box');
 var lowerRightBox = document.querySelector('#ninth-box');
 var board = document.querySelector('.game-grid');
-var buttons = document.querySelectorAll('button')
+var button = document.querySelectorAll('button')
 
 //---------------------------Event Listeners------------------------//
 board.addEventListener('click', function(event) {
@@ -39,7 +39,7 @@ board.addEventListener('click', function(event) {
     reenableBoxes();
  });
 
-//------------------------DOM Functions-----------------------//
+ //------------------------DOM Functions-----------------------//
 
 function updateToken() {
      for (var i = 0; i < 9; i++) {
