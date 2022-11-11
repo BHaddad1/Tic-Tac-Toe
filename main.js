@@ -10,7 +10,7 @@ var newGame = new Game ();
 var player1 = newGame.player1;
 var player2 = newGame.player2;
 var currentPlayer;
-var setTime
+var player1Won;
 //.........................Query Selectors......................
 var winsTrackerLeft = document.querySelector('.wins-tracker-left');
 var winsTrackerRight = document.querySelector('.wins-tracker-right');
@@ -29,10 +29,11 @@ var board = document.querySelector('.game-grid');
 
 //---------------------------Event Listeners------------------------//
 board.addEventListener('click', function(event) {
-    newGame.trackPlayerPositions(event.target.id);
+    newGame.trackPlayerPositions(Number(event.target.id));
     updateToken();
     newGame.changePlayerTurn();
     preventChangingTokens(event);
+    changeTurnOnDom();
     checkForWinOrDraw();
     reenableBoxes();
  });
@@ -68,28 +69,30 @@ function reenableBoxes() {
     }
 };
 
+function changeTurnOnDom() {
+    if (!newGame.turn) {
+        turnTracker.innerText = `Izzy's Turn`;
+    } else {
+        turnTracker.innerText = `Chesty's Turn`;
+    }
+}
+
 function checkForWinOrDraw() {
+    newGame.checkForWin();
     if (newGame.checkForDraw() === true) {
-        for (var i = 0; i < 9; i++) {
-            boxes[i].classList.add('disabled');
-        };
         turnTracker.innerText = `It's a draw!`;
         setTimeout(clearBoard, 2000);
-    } else if (newGame.checkForWin() === true) {
-        for (var i = 0; i < 9; i++) {
-            boxes[i].classList.add('disabled');
-        };
-        winsTrackerLeft.innerText = `${newGame.player1.wins} Wins`;
-        winsTrackerRight.innerText = `${newGame.player2.wins} Wins`;
-        turnTracker.innerText = `Chesty won!`;
-        setTimeout(clearBoard, 2000);
-    } else if (newGame.checkForWin() === false) {
-        for (var i = 0; i < 9; i++) {
-            boxes[i].classList.add('disabled');
-        };
-        winsTrackerRight.innerText = `${newGame.player2.wins} Wins`;
-        winsTrackerLeft.innerText = `${newGame.player1.wins} Wins`;
+    } else if (newGame.gameOver === true && newGame.turn === true) {
+        console.log(player1.wins);
+        winsTrackerLeft.innerText = `${player1.wins} Wins`;
+        winsTrackerRight.innerText = `${player2.wins} Wins`;
         turnTracker.innerText = `Izzy won!`;
+        setTimeout(clearBoard, 2000);
+    } else if (newGame.gameOver === true && newGame.turn === false) {
+        console.log(player2.wins);
+        winsTrackerRight.innerText = `${player2.wins} Wins`;
+        winsTrackerLeft.innerText = `${player1.wins} Wins`;
+        turnTracker.innerText = `Chesty won!`;
         setTimeout(clearBoard, 2000);
     }
 };
@@ -98,7 +101,11 @@ function clearBoard() {
         newGame.resetBoard();
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
-      } // winner goes next so the innertext should be "someone's turn"
+        } if (player1.didWin === true) {
+            turnTracker.innerText = `Izzy's Turn`;
+        } if (player2.didWin === true) {
+            turnTracker.innerText = `Chesty's Turn`;
+        }
 }
 
 //----------------------------------DATA MODEL FUNCTIONS----------------------//

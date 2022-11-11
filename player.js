@@ -7,7 +7,7 @@ class Player {
         this.didWin = false;
     }
     increaseWins() {
-        this.wins += 1;
+        this.wins++;
         this.didWin = true;
     }
 }
