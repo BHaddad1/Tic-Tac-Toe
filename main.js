@@ -35,7 +35,7 @@ board.addEventListener('click', function(event) {
     checkForWinOrDraw();
     reenableBoxes();
     // updateScores();
-    clearBoard();
+    // clearBoard();
 });
 
 //------------------------DOM Functions-----------------------//
@@ -67,27 +67,32 @@ function reenableBoxes(event) {
 };
 
 function checkForWinOrDraw() {
-    newGame.checkForWin();
-    if (newGame.checkForWin() === true) {
+     if (newGame.checkForWin() === true) {
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         turnTracker.innerText = `Chesty won!`
+        for (var i = 0; i < 9; i++) {
+            boxes[i].innerText = ""
+        }
     } else if (newGame.checkForWin() === false) {
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         turnTracker.innerText = `Izzy won!`
+        for (var i = 0; i < 9; i++) {
+            boxes[i].innerText = ""
+        }
     } else if (newGame.checkForDraw() === true) {
         turnTracker.innerText = `It's a draw!`
     } 
 };
 
-// reset board function for DOM 
-// setTimeout()
-// clear out the pieces
-// 
-function clearBoard(boxes) {
-    if (newGame.checkForDraw() === true || newGame.checkForWin === true || newGame.checkForWin === false) {
-        var resetBoardFunction = setTimeout(newGame.resetBoard, 1000);
+function clearBoard() {
+    if (newGame.gameOver === true) {
+        var resetBoardFunction = setTimeout(function() {
+        newGame.resetBoard()}, 3000);
+        for (var i = 0; i < 9; i++) {
+            boxes[i].innerText = "";
+        }
     }
 };
 
