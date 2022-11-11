@@ -30,7 +30,7 @@ var board = document.querySelector('.game-grid');
 //---------------------------Event Listeners------------------------//
 board.addEventListener('click', function(event) {
     newGame.trackPlayerPositions(event.target.id);
-    updateToken(event);
+    updateToken();
     newGame.changePlayerTurn();
     preventChangingTokens(event);
     checkForWinOrDraw();
@@ -39,11 +39,14 @@ board.addEventListener('click', function(event) {
 
 //------------------------DOM Functions-----------------------//
 
-function updateToken(event) {
+function updateToken() {
      for (var i = 0; i < 9; i++) {
+        if (newGame.gameOver === true) {
+            return;
+        }
         if (newGame.board[i] === 0) {
             boxes[i].innerText = "";
-        } else if (newGame.board[i] === 1) {
+          } else if (newGame.board[i] === 1) {
             boxes[i].innerText = newGame.player1.token;
         } else if (newGame.board[i] === 2) {
             boxes[i].innerText = newGame.player2.token;
@@ -59,7 +62,7 @@ function preventChangingTokens(event){
     }
 };
 
-function reenableBoxes(event) {
+function reenableBoxes() {
     for (var i = 0; i < 9; i++){
         boxes[i].classList.remove('disabled')
     }
@@ -67,35 +70,35 @@ function reenableBoxes(event) {
 
 function checkForWinOrDraw() {
     if (newGame.checkForDraw() === true) {
-        turnTracker.innerText = `It's a draw!`
-        setTimeout(newGame.resetBoard, 3000)
+        for (var i = 0; i < 9; i++) {
+            boxes[i].classList.add('disabled');
+        };
+        turnTracker.innerText = `It's a draw!`;
+        setTimeout(clearBoard, 2000);
     } else if (newGame.checkForWin() === true) {
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
-        turnTracker.innerText = `Chesty won!`
         for (var i = 0; i < 9; i++) {
-            boxes[i].innerText = ""
-        }
-       setTimeout(newGame.resetBoard, 3000)
+            boxes[i].classList.add('disabled');
+        };
+        winsTrackerLeft.innerText = `${newGame.player1.wins} Wins`;
+        winsTrackerRight.innerText = `${newGame.player2.wins} Wins`;
+        turnTracker.innerText = `Chesty won!`;
+        setTimeout(clearBoard, 2000);
     } else if (newGame.checkForWin() === false) {
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
-        turnTracker.innerText = `Izzy won!`
         for (var i = 0; i < 9; i++) {
-            boxes[i].innerText = ""
-        }
-        setTimeout(newGame.resetBoard, 3000)
+            boxes[i].classList.add('disabled');
+        };
+        winsTrackerRight.innerText = `${newGame.player2.wins} Wins`;
+        winsTrackerLeft.innerText = `${newGame.player1.wins} Wins`;
+        turnTracker.innerText = `Izzy won!`;
+        setTimeout(clearBoard, 2000);
     }
 };
 
-function clearDom() {
-    if (newGame.gameOver === true) {
-        // var resetBoardFunction = setTimeout(function() {
-        // newGame.resetBoard()}, 3000);
+function clearBoard() {
+        newGame.resetBoard();
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
-        }
-    }
-};
+      } // winner goes next so the innertext should be "someone's turn"
+}
 
 //----------------------------------DATA MODEL FUNCTIONS----------------------//
