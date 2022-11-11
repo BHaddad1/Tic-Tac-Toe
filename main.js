@@ -86,13 +86,13 @@ function checkForWinOrDraw() {
     } 
 };
 
-// reset board function for DOM 
-// setTimeout()
-// clear out the pieces
-// 
-function clearBoard(boxes) {
-    if (newGame.checkForDraw() === true || newGame.checkForWin === true || newGame.checkForWin === false) {
-        var resetBoardFunction = setTimeout(newGame.resetBoard, 1000);
+function clearBoard() {
+    if (newGame.gameOver === true) {
+        for (var i = 0; i < 9; i++) {
+            boxes[i].innerText = "";
+        }
+        var resetBoardFunction = setTimeout(function() {
+        newGame.resetBoard()}, 3000);
     }
 };
 
