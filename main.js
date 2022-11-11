@@ -10,7 +10,7 @@ var newGame = new Game ();
 var player1 = newGame.player1;
 var player2 = newGame.player2;
 var currentPlayer;
-var setTime
+var player1Won;
 //.........................Query Selectors......................
 var winsTrackerLeft = document.querySelector('.wins-tracker-left');
 var winsTrackerRight = document.querySelector('.wins-tracker-right');
@@ -29,21 +29,25 @@ var board = document.querySelector('.game-grid');
 
 //---------------------------Event Listeners------------------------//
 board.addEventListener('click', function(event) {
-    newGame.trackPlayerPositions(event.target.id);
-    updateToken(event);
+    newGame.trackPlayerPositions(Number(event.target.id));
+    updateToken();
     newGame.changePlayerTurn();
     preventChangingTokens(event);
+    changeTurnOnDom();
     checkForWinOrDraw();
     reenableBoxes();
  });
 
 //------------------------DOM Functions-----------------------//
 
-function updateToken(event) {
+function updateToken() {
      for (var i = 0; i < 9; i++) {
+        if (newGame.gameOver === true) {
+            return;
+        }
         if (newGame.board[i] === 0) {
             boxes[i].innerText = "";
-        } else if (newGame.board[i] === 1) {
+          } else if (newGame.board[i] === 1) {
             boxes[i].innerText = newGame.player1.token;
         } else if (newGame.board[i] === 2) {
             boxes[i].innerText = newGame.player2.token;
@@ -59,43 +63,49 @@ function preventChangingTokens(event){
     }
 };
 
-function reenableBoxes(event) {
+function reenableBoxes() {
     for (var i = 0; i < 9; i++){
         boxes[i].classList.remove('disabled')
     }
 };
 
+function changeTurnOnDom() {
+    if (!newGame.turn) {
+        turnTracker.innerText = `Izzy's Turn`;
+    } else {
+        turnTracker.innerText = `Chesty's Turn`;
+    }
+}
+
 function checkForWinOrDraw() {
+    newGame.checkForWin();
     if (newGame.checkForDraw() === true) {
-        turnTracker.innerText = `It's a draw!`
-        setTimeout(newGame.resetBoard, 3000)
-    } else if (newGame.checkForWin() === true) {
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
-        turnTracker.innerText = `Chesty won!`
-        for (var i = 0; i < 9; i++) {
-            boxes[i].innerText = ""
-        }
-       setTimeout(newGame.resetBoard, 3000)
-    } else if (newGame.checkForWin() === false) {
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
-        turnTracker.innerText = `Izzy won!`
-        for (var i = 0; i < 9; i++) {
-            boxes[i].innerText = ""
-        }
-        setTimeout(newGame.resetBoard, 3000)
+        turnTracker.innerText = `It's a draw!`;
+        setTimeout(clearBoard, 2000);
+    } else if (newGame.gameOver === true && newGame.turn === true) {
+        console.log(player1.wins);
+        winsTrackerLeft.innerText = `${player1.wins} Wins`;
+        winsTrackerRight.innerText = `${player2.wins} Wins`;
+        turnTracker.innerText = `Izzy won!`;
+        setTimeout(clearBoard, 2000);
+    } else if (newGame.gameOver === true && newGame.turn === false) {
+        console.log(player2.wins);
+        winsTrackerRight.innerText = `${player2.wins} Wins`;
+        winsTrackerLeft.innerText = `${player1.wins} Wins`;
+        turnTracker.innerText = `Chesty won!`;
+        setTimeout(clearBoard, 2000);
     }
 };
 
-function clearDom() {
-    if (newGame.gameOver === true) {
-        // var resetBoardFunction = setTimeout(function() {
-        // newGame.resetBoard()}, 3000);
+function clearBoard() {
+        newGame.resetBoard();
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
+        } if (player1.didWin === true) {
+            turnTracker.innerText = `Izzy's Turn`;
+        } if (player2.didWin === true) {
+            turnTracker.innerText = `Chesty's Turn`;
         }
-    }
-};
+}
 
 //----------------------------------DATA MODEL FUNCTIONS----------------------//

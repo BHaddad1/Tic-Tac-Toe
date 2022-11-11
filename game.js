@@ -23,62 +23,58 @@ class Game {
         this.gameOver = false;
     }
      changePlayerTurn() {
-        this.turn = !this.turn
+        this.turn = !this.turn;
     }
     trackPlayerPositions(position) {
-        if(this.board[position] === 0 && this.turn){
+        if (this.gameOver === true) {
+            this.board = [0, 0, 0,
+                        0, 0, 0,
+                        0, 0, 0];
+        } else if(this.board[position] === 0 && this.turn) {
             this.board[position] = 1;
             this.player1.currentPositions.push(position);
-            console.log(this.player1.currentPositions);
-        } else if (this.board[position] === 0 && !this.turn){
+            this.turn = true;
+            console.log("player 1 positions in track player position", this.player1.currentPositions);
+        } else if (this.board[position] === 0 && !this.turn) {
             this.board[position] = 2;
             this.player2.currentPositions.push(position);
-            console.log(this.player2.currentPositions);
-        }
+            this.turn = false;
+            console.log("player 2 positions in track player position", this.player2.currentPositions)
+        } 
     }
     checkForWin() {
-        var player1Positions = [];
-        var player2Positions = [];
-        for (var i = 0; i < this.board.length; i++) {
-            if (this.board[i] === 1) {
-                player1Positions.push(i);
-            } else if (this.board[i] === 2) {
-                player2Positions.push(i);
-            }
-        }
-        console.log(this.board);
+        // for (var i = 0; i < this.board.length; i++) {
+        //     if (this.board[i] === 1) {
+        //         this.player1.currentPositions.push(i);
+        //     } else if (this.board[i] === 2) {
+        //        this.player2.currentPositions.push(i);
+        //     } 
+        // };
         for (var i = 0; i < this.possibleWins.length; i++) {
-            if (player1Positions.includes(this.possibleWins[i][0]) && player1Positions.includes(this.possibleWins[i][1]) && player1Positions.includes(this.possibleWins[i][2])) {
+            if (this.player1.currentPositions.includes(this.possibleWins[i][0]) && this.player1.currentPositions.includes(this.possibleWins[i][1]) && this.player1.currentPositions.includes(this.possibleWins[i][2])) {
                 this.player1.increaseWins();
-                console.log("player1 wins");
+                console.log("player1 pos in check for win", this.player1.currentPositions)
                 this.gameOver = true;
-                this.resetBoard();
-                console.log(this.board);
                 return true;
-            }  else if (player2Positions.includes(this.possibleWins[i][0]) && player2Positions.includes(this.possibleWins[i][1]) && player2Positions.includes(this.possibleWins[i][2])) {
-                this.player2.increaseWins(); 
-                console.log("player2 wins");
+            } else if (this.player2.currentPositions.includes(this.possibleWins[i][0]) && this.player2.currentPositions.includes(this.possibleWins[i][1]) && this.player2.currentPositions.includes(this.possibleWins[i][2])) {
+                this.player2.increaseWins();
+                console.log("player2 pos in check for win", this.player2.currentPositions)
                 this.gameOver = true;
-                this.resetBoard();
-                console.log(this.board);
                 return false;
             } 
         }
     }
     checkForDraw() {
-        console.log("check for draw")
         for (var i = 0; i < this.board.length; i++){
             if (this.board[i] === 0) {
                 this.draw = false;
-                this.gameOver = false;
-                console.log("NOT YET BITCH")
                 return false;
             } 
         }
         this.draw = true;
         this.gameOver = true;
-        console.log("ITS A DRAW DUMBASS")
-        // this.resetBoard();
+        this.player1.didWin = false;
+        this.player2.didWin = false;
         return true;
     } 
     resetBoard() {
@@ -86,10 +82,8 @@ class Game {
             this.board = [0, 0, 0,
                          0, 0, 0,
                          0, 0, 0];
+            this.gameOver = false;
             this.player1.currentPositions = [];
             this.player2.currentPositions = [];
-            for (var i = 0; i < 9; i++){
-                boxes[i].innerText = ""
-        }
     }
-}
+};
