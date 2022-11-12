@@ -28,20 +28,28 @@ class Game {
     trackPlayerPositions(position) {
         if (this.gameOver === true) {
             this.board = [0, 0, 0,
-                        0, 0, 0,
-                        0, 0, 0];
-        } else if(this.board[position] === 0 && this.turn) {
-            this.board[position] = 1;
-            this.player1.currentPositions.push(position);
-            this.turn = true;
-            console.log("player 1 positions in track player position", this.player1.currentPositions);
-        } else if (this.board[position] === 0 && !this.turn) {
-            this.board[position] = 2;
-            this.player2.currentPositions.push(position);
-            this.turn = false;
-            console.log("player 2 positions in track player position", this.player2.currentPositions)
-        } 
-    }
+                0, 0, 0,
+                0, 0, 0];
+            } else if(this.board[position] === 0 && this.turn) {
+                this.board[position] = 1;
+                this.player1.currentPositions.push(position);
+                console.log("player1 pos", this.player1.currentPositions)
+           } else if (this.board[position] === 0 && !this.turn) {
+                this.board[position] = 2;
+                this.player2.currentPositions.push(position);
+                console.log("player2 pos", this.player2.currentPositions)
+            } 
+        }
+    checkAvailableSpaces() {
+            for (var i = 0; i < this.board.length; i++)
+            if (this.board[i] === 0) {
+                console.log(this.board)
+                return true
+            } else {
+                console.log(this.board)
+                return false
+            }
+        }
     checkForWin() {
         // for (var i = 0; i < this.board.length; i++) {
         //     if (this.board[i] === 1) {
