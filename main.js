@@ -6,7 +6,9 @@ var currentPlayer;
 var player1Won;
 
 var winsTrackerLeft = document.querySelector('.wins-tracker-left');
+var winsCounterLeft = document.querySelector('.wins-counter-right')
 var winsTrackerRight = document.querySelector('.wins-tracker-right');
+var winsCounterRight = document.querySelector('.wins-counter-left')
 var turnTracker = document.querySelector('.turn-tracker');
 var boxes = document.querySelectorAll('.box');
 var upperLeftBox = document.querySelector('#first-box');
@@ -19,7 +21,7 @@ var lowerLeftBox = document.querySelector('#seventh-box');
 var lowerMiddleBox = document.querySelector('#eighth-box');
 var lowerRightBox = document.querySelector('#ninth-box');
 var board = document.querySelector('.game-grid');
-var button = document.querySelectorAll('button')
+var button = document.querySelectorAll('button');
 
 board.addEventListener('click', function(event) {
     if (newGame.checkAvailableSpaces() === true) {
@@ -70,13 +72,13 @@ function checkForWinOrDraw() {
         turnTracker.innerText = `It's a draw!`;
         setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === true) {
-        winsTrackerLeft.innerText = `Chesty's Wins: ${player1.wins} Wins`;
-        winsTrackerRight.innerText = `Izzy's Wins: ${player2.wins} Wins`;
+        winsCounterLeft.innerText = `${player1.wins} Wins`;
+        winsCounterRight.innerText = `${player2.wins} Wins`;
         turnTracker.innerText = `Izzy won!`;
         setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === false) {
-        winsTrackerRight.innerText = `Izzy's Wins: ${player2.wins} Wins`;
-        winsTrackerLeft.innerText = `Chesty's Wins: ${player1.wins} Wins`;
+        winsCounterRight.innerText = `${player2.wins} Wins`;
+        winsCounterLeft.innerText = `${player1.wins} Wins`;
         turnTracker.innerText = `Chesty won!`;
         setTimeout(clearBoard, 2000);
     }
