@@ -17,9 +17,6 @@ class Game {
                             [0, 4, 8],
                             [2, 4, 6],
                             ];
-        this.defaultBoard = [0, 0, 0,
-                            0, 0, 0,
-                            0, 0, 0];
         this.gameOver = false;
     }
      changePlayerTurn() {
@@ -30,43 +27,31 @@ class Game {
             this.board = [0, 0, 0,
                 0, 0, 0,
                 0, 0, 0];
-            } else if(this.board[position] === 0 && this.turn) {
-                this.board[position] = 1;
-                this.player1.currentPositions.push(position);
-                console.log("player1 pos", this.player1.currentPositions)
-           } else if (this.board[position] === 0 && !this.turn) {
-                this.board[position] = 2;
-                this.player2.currentPositions.push(position);
-                console.log("player2 pos", this.player2.currentPositions)
+        } else if(this.board[position] === 0 && this.turn) {
+            this.board[position] = 1;
+            this.player1.currentPositions.push(position);
+
+        } else if (this.board[position] === 0 && !this.turn) {
+            this.board[position] = 2;
+            this.player2.currentPositions.push(position);
             } 
         }
     checkAvailableSpaces() {
-            for (var i = 0; i < this.board.length; i++)
-            if (this.board[i] === 0) {
-                console.log(this.board)
-                return true
-            } else {
-                console.log(this.board)
-                return false
+        var position = event.target.id; 
+        if (this.board[position] === 0) {
+            return true
+        } else {
+            return false
             }
         }
     checkForWin() {
-        // for (var i = 0; i < this.board.length; i++) {
-        //     if (this.board[i] === 1) {
-        //         this.player1.currentPositions.push(i);
-        //     } else if (this.board[i] === 2) {
-        //        this.player2.currentPositions.push(i);
-        //     } 
-        // };
         for (var i = 0; i < this.possibleWins.length; i++) {
             if (this.player1.currentPositions.includes(this.possibleWins[i][0]) && this.player1.currentPositions.includes(this.possibleWins[i][1]) && this.player1.currentPositions.includes(this.possibleWins[i][2])) {
                 this.player1.increaseWins();
-                console.log("player1 pos in check for win", this.player1.currentPositions)
                 this.gameOver = true;
                 return true;
             } else if (this.player2.currentPositions.includes(this.possibleWins[i][0]) && this.player2.currentPositions.includes(this.possibleWins[i][1]) && this.player2.currentPositions.includes(this.possibleWins[i][2])) {
                 this.player2.increaseWins();
-                console.log("player2 pos in check for win", this.player2.currentPositions)
                 this.gameOver = true;
                 return false;
             } 
