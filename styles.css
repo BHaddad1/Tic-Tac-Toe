@@ -40,11 +40,17 @@ body {
 }
 
 .wins-tracker-left,
-.wins-tracker-right {
+.wins-tracker-right,
+.wins-counter-right,
+.wins-counter-left {
     color: gray;
     font-size: 40px;
     text-align: center;
-    padding-top: 25%;
+    padding-top: 40%;
+}
+
+p {
+    margin: 0;
 }
 
 .turn-tracker {
