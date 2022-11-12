@@ -70,13 +70,13 @@ function checkForWinOrDraw() {
         turnTracker.innerText = `It's a draw!`;
         setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === true) {
-        winsTrackerLeft.innerText = `${player1.wins} Wins`;
-        winsTrackerRight.innerText = `${player2.wins} Wins`;
+        winsTrackerLeft.innerText = `Chesty's Wins: ${player1.wins} Wins`;
+        winsTrackerRight.innerText = `Izzy's Wins: ${player2.wins} Wins`;
         turnTracker.innerText = `Izzy won!`;
         setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === false) {
-        winsTrackerRight.innerText = `${player2.wins} Wins`;
-        winsTrackerLeft.innerText = `${player1.wins} Wins`;
+        winsTrackerRight.innerText = `Izzy's Wins: ${player2.wins} Wins`;
+        winsTrackerLeft.innerText = `Chesty's Wins: ${player1.wins} Wins`;
         turnTracker.innerText = `Chesty won!`;
         setTimeout(clearBoard, 2000);
     }

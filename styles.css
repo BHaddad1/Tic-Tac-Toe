@@ -29,6 +29,7 @@ body {
 
 .side-bar-left,
 .side-bar-right {
+    background-color: white;
     display: flex;
     border: 2px solid white;
     align-items: center;
@@ -40,7 +41,7 @@ body {
 
 .wins-tracker-left,
 .wins-tracker-right {
-    color: white;
+    color: gray;
     font-size: 40px;
     text-align: center;
     padding-top: 25%;
