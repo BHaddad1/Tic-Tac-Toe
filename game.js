@@ -66,17 +66,14 @@ class Game {
         }
         this.draw = true;
         this.gameOver = true;
-        this.player1.didWin = false;
-        this.player2.didWin = false;
         return true;
     } 
     resetBoard() {
-        console.log("reset board")
-            this.board = [0, 0, 0,
+        this.board = [0, 0, 0,
                          0, 0, 0,
                          0, 0, 0];
-            this.gameOver = false;
-            this.player1.currentPositions = [];
-            this.player2.currentPositions = [];
+        this.gameOver = false;
+        this.player1.currentPositions = [];
+        this.player2.currentPositions = [];
     }
 };

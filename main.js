@@ -2,8 +2,6 @@
 var newGame = new Game ();
 var player1 = newGame.player1;
 var player2 = newGame.player2;
-var currentPlayer;
-var player1Won;
 
 var winsTrackerLeft = document.querySelector('.wins-tracker-left');
 var winsCounterLeft = document.querySelector('.wins-counter-right')
@@ -11,17 +9,7 @@ var winsTrackerRight = document.querySelector('.wins-tracker-right');
 var winsCounterRight = document.querySelector('.wins-counter-left')
 var turnTracker = document.querySelector('.turn-tracker');
 var boxes = document.querySelectorAll('.box');
-var upperLeftBox = document.querySelector('#first-box');
-var upperMiddleBox = document.querySelector('#second-box');
-var upperRightBox = document.querySelector('#third-box');
-var middleLeftBox = document.querySelector('#fourth-box');
-var middleBox = document.querySelector('#fifth-box');
-var middleRightBox = document.querySelector('#sixth-box');
-var lowerLeftBox = document.querySelector('#seventh-box');
-var lowerMiddleBox = document.querySelector('#eighth-box');
-var lowerRightBox = document.querySelector('#ninth-box');
 var board = document.querySelector('.game-grid');
-var button = document.querySelectorAll('button');
 
 board.addEventListener('click', function(event) {
     if (newGame.checkAvailableSpaces() === true) {
@@ -61,8 +49,8 @@ function preventChangingTokens(event){
 };
 
 function reenableBoxes() {
-    for (var i = 0; i < 9; i++){
-        boxes[i].classList.remove('disabled')
+    for (var i = 0; i < 9; i++) {
+        boxes[i].classList.remove('disabled');
     }
 };
 
