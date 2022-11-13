@@ -63,17 +63,26 @@ function checkForWinOrDraw() {
         winsCounterLeft.innerText = `${player1.wins} Wins`;
         winsCounterRight.innerText = `${player2.wins} Wins`;
         turnTracker.innerText = `Izzy won!`;
+        event.target.classList.add('disabled');
         setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === false) {
         winsCounterRight.innerText = `${player2.wins} Wins`;
         winsCounterLeft.innerText = `${player1.wins} Wins`;
         turnTracker.innerText = `Chesty won!`;
+        event.target.classList.add('disabled');
         setTimeout(clearBoard, 2000);
     }
 };
 
 function clearBoard() {
-        newGame.resetBoard();
+    if (newGame.checkForDraw() === true) {
+        turnTracker.innerText = `Izzy's turn`
+    } if (newGame.gameOver === true && newGame.turn === false) {
+        turnTracker.innerText = `Izzy's turn`
+    } if (newGame.gameOver === true && newGame.turn === true) {
+        turnTracker.innerText = `Chesty's turn`
+    }
+    newGame.resetBoard();
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
         }
