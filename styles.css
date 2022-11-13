@@ -6,22 +6,22 @@ body {
     color: solid white;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    height: 100%;
-    width: 100%;
-    margin: 0;
     font-family: 'Poppins', sans-serif;
+    height: 100%;
+    justify-content: flex-start;
+    margin: 0;
+    width: 100%;
 }
 
 /* header stylings */
 
 .main-container {
     align-items: center;
-    width: 60vw;
-    height: 100vh;
     display: flex; 
     flex-direction: column;
     flex-wrap: wrap;
+    height: 100vh;
+    width: 60vw;
 }
 
 
@@ -29,14 +29,14 @@ body {
 
 .side-bar-left,
 .side-bar-right {
-    background-color: white;
-    display: flex;
-    border: 2px solid white;
     align-items: center;
+    background-color: white;
+    border: 2px solid white;
+    display: flex;
     height: 100vh;
-    width: 20vw;
-    justify-content: flex-start;
     flex-direction: column; 
+    justify-content: flex-start;
+    width: 20vw;
 }
 
 .wins-tracker-left,
@@ -45,8 +45,8 @@ body {
 .wins-counter-left {
     color: gray;
     font-size: 40px;
-    text-align: center;
     padding-top: 40%;
+    text-align: center;
 }
 
 p {
@@ -56,8 +56,8 @@ p {
 .turn-tracker {
     color: white;
     font-size: 40px;
-    text-align: center;
     padding-top: 5%;
+    text-align: center;
 }
 
 
