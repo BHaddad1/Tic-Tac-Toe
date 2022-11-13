@@ -37,7 +37,7 @@ class Game {
             } 
         }
     checkAvailableSpaces() {
-        var position = event.target.id; 
+        var position = Number(event.target.id); 
         if (this.board[position] === 0) {
             return true
         } else {
