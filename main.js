@@ -103,4 +103,4 @@ function displayWinsOnLoad() {
     winsCounterLeft.innerText = `${player1.wins} Wins`;
     player2.wins = localStorage.getItem('winsRight');
     winsCounterRight.innerText = `${player2.wins} Wins`;
-}
+};
