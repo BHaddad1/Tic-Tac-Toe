@@ -49,12 +49,10 @@ class Game {
             if (this.player1.currentPositions.includes(this.possibleWins[i][0]) && this.player1.currentPositions.includes(this.possibleWins[i][1]) && this.player1.currentPositions.includes(this.possibleWins[i][2])) {
                 this.gameOver = true;
                 this.player1.increaseWins();
-                console.log("board when player 1 wins", this.board);
                 return;
             } else if (this.player2.currentPositions.includes(this.possibleWins[i][0]) && this.player2.currentPositions.includes(this.possibleWins[i][1]) && this.player2.currentPositions.includes(this.possibleWins[i][2])) {
                 this.gameOver = true;
                 this.player2.increaseWins();
-                console.log("baord when ply2 wins", this.board);
                 return;
             } 
         }
