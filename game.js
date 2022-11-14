@@ -47,13 +47,15 @@ class Game {
     checkForWin() {
         for (var i = 0; i < this.possibleWins.length; i++) {
             if (this.player1.currentPositions.includes(this.possibleWins[i][0]) && this.player1.currentPositions.includes(this.possibleWins[i][1]) && this.player1.currentPositions.includes(this.possibleWins[i][2])) {
+                this.gameOver = true;
                 this.player1.increaseWins();
-                this.gameOver = true;
-                return true;
+                console.log("board when player 1 wins", this.board);
+                return;
             } else if (this.player2.currentPositions.includes(this.possibleWins[i][0]) && this.player2.currentPositions.includes(this.possibleWins[i][1]) && this.player2.currentPositions.includes(this.possibleWins[i][2])) {
-                this.player2.increaseWins();
                 this.gameOver = true;
-                return false;
+                this.player2.increaseWins();
+                console.log("baord when ply2 wins", this.board);
+                return;
             } 
         }
     }
@@ -70,8 +72,8 @@ class Game {
     } 
     resetBoard() {
         this.board = [0, 0, 0,
-                         0, 0, 0,
-                         0, 0, 0];
+                    0, 0, 0,
+                    0, 0, 0];
         this.gameOver = false;
         this.player1.currentPositions = [];
         this.player2.currentPositions = [];
