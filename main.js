@@ -54,22 +54,28 @@ function reenableBoxes() {
     }
 };
 
+function disableBoxes() {
+    for (var i = 0; i < 9; i++)
+    boxes[i].classList.add('disabled');
+};
+
 function checkForWinOrDraw() {
     newGame.checkForWin();
     if (newGame.checkForDraw() === true) {
+        board.classList.add('disabled');
         turnTracker.innerText = `It's a draw!`;
         setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === true) {
+        board.classList.add('disabled');
         winsCounterLeft.innerText = `${player1.wins} Wins`;
         winsCounterRight.innerText = `${player2.wins} Wins`;
         turnTracker.innerText = `Izzy won!`;
-        event.target.classList.add('disabled');
         setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === false) {
+        board.classList.add('disabled');
         winsCounterRight.innerText = `${player2.wins} Wins`;
         winsCounterLeft.innerText = `${player1.wins} Wins`;
         turnTracker.innerText = `Chesty won!`;
-        event.target.classList.add('disabled');
         setTimeout(clearBoard, 2000);
     }
 };
@@ -86,4 +92,5 @@ function clearBoard() {
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
         }
+    board.classList.remove('disabled');
 };
