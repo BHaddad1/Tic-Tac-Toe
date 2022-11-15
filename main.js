@@ -21,15 +21,14 @@ var board = document.querySelector('.game-grid');
 //---------------------------Event Listeners------------------------//
 window.addEventListener('load', displayWinsOnLoad);
 board.addEventListener('click', function(event) {
+    if (newGame.checkAvailableSpaces() === true) {
     newGame.trackPlayerPositions(event.target.id);
     updateToken(event);
     newGame.changePlayerTurn();
     preventChangingTokens(event);
     checkForWinOrDraw();
     reenableBoxes();
-    // updateScores();
-    // clearBoard();
-});
+}});
 
 //------------------------DOM Functions-----------------------//
 
