@@ -20,7 +20,7 @@ Hang out with Chesty and Izzy and play some tic-Tac-Toe! Local storage will keep
 - cd into the repo.
 - Open the repo in your code editor.
 - Run 'open index.html'
--Alternatively, use this link: https://bhaddad1.github.io/Tic-Tac-Toe/
+- Alternatively, use this link: https://bhaddad1.github.io/Tic-Tac-Toe/
 
 ### Preview of App: 
 ![Gif of preview](assets/previewgif.gif)
