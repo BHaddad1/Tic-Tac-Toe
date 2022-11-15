@@ -1,33 +1,26 @@
-// how does the token get into the possible positions? 
+ // how does the token get into the possible positions? 
 
-// IN MAIN JS IF IT"S THIS PLAYERS TURN< SNET THE INNTERTEXT TO THAT PLAYER'S TOKEN. 
-// BOARD SHOILD BE DISABLED UNTIL ITS RESET--- add diaabled to the class after the game is done.
+        // IN MAIN JS IF IT"S THIS PLAYERS TURN< SNET THE INNTERTEXT TO THAT PLAYER'S TOKEN. 
+        // BOARD SHOILD BE DISABLED UNTIL ITS RESET--- add diaabled to the class after the game is done.
 // when the game ends, wait a few seconds, and reset the board. 
 
 
 // -----------------------------Global Variables----------------------//
-var newGame = new Game();
+var newGame = new Game ();
 var player1 = newGame.player1;
 var player2 = newGame.player2;
-var currentPlayer;
-//.........................Query Selectors......................
+
 var winsTrackerLeft = document.querySelector('.wins-tracker-left');
+var winsCounterLeft = document.querySelector('.wins-counter-right')
 var winsTrackerRight = document.querySelector('.wins-tracker-right');
+var winsCounterRight = document.querySelector('.wins-counter-left')
 var turnTracker = document.querySelector('.turn-tracker');
 var boxes = document.querySelectorAll('.box');
-var upperLeftBox = document.querySelector('#first-box');
-var upperMiddleBox = document.querySelector('#second-box');
-var upperRightBox = document.querySelector('#third-box');
-var middleLeftBox = document.querySelector('#fourth-box');
-var middleBox = document.querySelector('#fifth-box');
-var middleRightBox = document.querySelector('#sixth-box');
-var lowerLeftBox = document.querySelector('#seventh-box');
-var lowerMiddleBox = document.querySelector('#eighth-box');
-var lowerRightBox = document.querySelector('#ninth-box');
 var board = document.querySelector('.game-grid');
 
 //---------------------------Event Listeners------------------------//
-board.addEventListener('click', function (event) {
+window.addEventListener('load', displayWinsOnLoad);
+board.addEventListener('click', function(event) {
     newGame.trackPlayerPositions(event.target.id);
     updateToken(event);
     newGame.changePlayerTurn();
@@ -35,18 +28,21 @@ board.addEventListener('click', function (event) {
     checkForWinOrDraw();
     reenableBoxes();
     // updateScores();
+    // clearBoard();
 });
 
 //------------------------DOM Functions-----------------------//
 
 function updateToken(event) {
-    for (var i = 0; i < 9; i++) {
+     for (var i = 0; i < 9; i++) {
         if (newGame.board[i] === 0) {
             boxes[i].innerText = "";
         } else if (newGame.board[i] === 1) {
             boxes[i].innerText = newGame.player1.token;
+            turnTracker.innerText = `Izzy's Turn`
         } else if (newGame.board[i] === 2) {
             boxes[i].innerText = newGame.player2.token;
+            turnTracker.innerText = `Chesty's Turn`;
         }
     }
 };
@@ -54,46 +50,62 @@ function updateToken(event) {
 function preventChangingTokens(event) {
     if (event.target.innerText === player1.token) {
         event.target.classList.add('disabled')
+        newGame.turn = false;
     } else if (event.target.innerText === player2.token) {
         event.target.classList.add('disabled')
+        newGame.turn = true;
     }
 };
 
 function reenableBoxes(event) {
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i < 9; i++){
         boxes[i].classList.remove('disabled')
     }
 };
 
+function disableBoxes() {
+    for (var i = 0; i < 9; i++)
+    boxes[i].classList.add('disabled');
+};
+
 function checkForWinOrDraw() {
-    if (newGame.checkForWin() === true) {
+    if (newGame.checkForDraw() === true) {
+        turnTracker.innerText = `It's a draw!`
+        setTimeout(clearBoard, 2000);
+    } 
+     if (newGame.gameOver === true && newGame.turn === false) {
+        board.classList.add('disabled');
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         turnTracker.innerText = `Chesty won!`
-        for (var i = 0; i < 9; i++) {
-            boxes[i].innerText = ""
-        }
-    } else if (newGame.checkForWin() === false) {
+        setTimeout(clearBoard, 2000)
+    } else if (newGame.gameOver === true && newGame.turn === true) {
+        board.classList.add('dsiabled';)
         winsTrackerRight.innerText = `${newGame.player2.wins} games won`
         winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
         turnTracker.innerText = `Izzy won!`
-        for (var i = 0; i < 9; i++) {
-            boxes[i].innerText = ""
-        }
-    } else if (newGame.checkForDraw() === true) {
-        turnTracker.innerText = `It's a draw!`
+         setTimeout(clearBoard, 2000)
     }
 };
 
 function clearBoard() {
-    if (newGame.gameOver === true) {
-        var resetBoardFunction = setTimeout(function () {
-            newGame.resetBoard()
-        }, 3000);
+    if (newGame.checkForDraw() === true) {
+        turnTracker.innerText = `Izzy's turn`
+    } if (newGame.gameOver === true && newGame.turn === false) {
+        turnTracker.innerText = `Izzy's turn`
+    } if (newGame.gameOver === true && newGame.turn === true) {
+        turnTracker.innerText = `Chesty's turn`
+    }
+    newGame.resetBoard();
         for (var i = 0; i < 9; i++) {
             boxes[i].innerText = "";
         }
-    }
+    board.classList.remove('disabled');
 };
 
-//----------------------------------DATA MODEL FUNCTIONS----------------------//
+function displayWinsOnLoad() {
+    player1.wins = localStorage.getItem('winsLeft');
+    winsCounterLeft.innerText = `${player1.wins} Wins`;
+    player2.wins = localStorage.getItem('winsRight');
+    winsCounterRight.innerText = `${player2.wins} Wins`;
+};

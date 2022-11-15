@@ -4,10 +4,8 @@ class Player {
         this.wins = 0;
         this.currentPositions = [];
         this.id = id;
-        this.didWin = false;
     }
     increaseWins() {
-        this.wins += 1;
-        this.didWin = true;
+        this.wins++;
     }
 }

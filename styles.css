@@ -1,25 +1,27 @@
 body {
     align-items: center;
-    color: #C6C6C6;
+    background-image: url(IMG_1312.jpeg);
+    background-repeat: no-repeat;
+    background-size: 2000px;
+    color: solid white;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    height: 100%;
-    width: 100%;
-    margin: 0;
     font-family: 'Poppins', sans-serif;
+    height: 100%;
+    justify-content: flex-start;
+    margin: 0;
+    width: 100%;
 }
-
 
 /* header stylings */
 
 .main-container {
     align-items: center;
-    width: 60vw;
-    height: 100vh;
     display: flex; 
     flex-direction: column;
     flex-wrap: wrap;
+    height: 100vh;
+    width: 60vw;
 }
 
 
@@ -27,33 +29,39 @@ body {
 
 .side-bar-left,
 .side-bar-right {
-    display: flex;
-    border: 2px solid black;
     align-items: center;
+    background-color: white;
+    border: 2px solid white;
+    display: flex;
     height: 100vh;
-    width: 20vw;
-    justify-content: flex-start;
     flex-direction: column; 
+    justify-content: flex-start;
+    width: 20vw;
 }
 
 .wins-tracker-left,
-.wins-tracker-right {
-    font-size: 25px;
+.wins-tracker-right,
+.wins-counter-right,
+.wins-counter-left {
+    color: gray;
+    font-size: 40px;
+    margin: 0;
+    padding-top: 30%;
     text-align: center;
-    padding-top: 25%;
 }
 
 .turn-tracker {
-    font-size: 40px;
-    text-align: center;
+    color: white;
+    font-size: 50px;
     padding-top: 5%;
+    text-align: center;
 }
-
 
 /* Grid Styling */
 
 .game-grid {
     display: grid;
+    font-size: 50px;
     grid-gap: 0px;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
     height: 60%;
@@ -62,9 +70,10 @@ body {
 }
 
 .box {
-    border: 5px solid black;
-    display: flex;
     align-items: center;
+    border: 5px solid white;
+    display: flex;
+    font-size: 60px;
     justify-content: center;
     margin: none;
 }
@@ -86,6 +95,5 @@ body {
 }
 
 .disabled { 
-    cursor: not-allowed;
     pointer-events: none;
 }
