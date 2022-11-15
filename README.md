@@ -31,9 +31,9 @@ Hang out with Chesty and Izzy and play some tic-Tac-Toe! Local storage will keep
 
 
 ### Wins & Challenges
-Some challenges included: 
+- Some challenges included: 
     - Fixing the data model solely based on console logs.
     - Cleaning up bugs that were created in the DOM that were caused by not accessing the data model correctly in the main.js file.
-Some wins included: 
+- Some wins included: 
     - Building out a correct data model.
     - Being able to fuly digest the concept of utilizing the data model to lead the DOM.
