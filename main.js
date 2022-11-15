@@ -1,12 +1,5 @@
- // how does the token get into the possible positions? 
-
-        // IN MAIN JS IF IT"S THIS PLAYERS TURN< SNET THE INNTERTEXT TO THAT PLAYER'S TOKEN. 
-        // BOARD SHOILD BE DISABLED UNTIL ITS RESET--- add diaabled to the class after the game is done.
-// when the game ends, wait a few seconds, and reset the board. 
-
-
-// -----------------------------Global Variables----------------------//
-var newGame = new Game ();
+ 
+var newGame = new Game();
 var player1 = newGame.player1;
 var player2 = newGame.player2;
 
@@ -18,22 +11,22 @@ var turnTracker = document.querySelector('.turn-tracker');
 var boxes = document.querySelectorAll('.box');
 var board = document.querySelector('.game-grid');
 
-//---------------------------Event Listeners------------------------//
 window.addEventListener('load', displayWinsOnLoad);
 board.addEventListener('click', function(event) {
     if (newGame.checkAvailableSpaces() === true) {
-    newGame.trackPlayerPositions(event.target.id);
-    updateToken(event);
-    newGame.changePlayerTurn();
-    preventChangingTokens(event);
-    checkForWinOrDraw();
-    reenableBoxes();
+        newGame.trackPlayerPositions(Number(event.target.id));
+        newGame.changePlayerTurn();
+        updateToken();
+        preventChangingTokens(event);
+        checkForWinOrDraw();
+        reenableBoxes();
 }});
 
-//------------------------DOM Functions-----------------------//
-
-function updateToken(event) {
+function updateToken() {
      for (var i = 0; i < 9; i++) {
+        if (newGame.gameOver === true) {
+            return;
+        }
         if (newGame.board[i] === 0) {
             boxes[i].innerText = "";
         } else if (newGame.board[i] === 1) {
@@ -43,10 +36,10 @@ function updateToken(event) {
             boxes[i].innerText = newGame.player2.token;
             turnTracker.innerText = `Chesty's Turn`;
         }
-    }
+     }
 };
 
-function preventChangingTokens(event) {
+function preventChangingTokens(event){ 
     if (event.target.innerText === player1.token) {
         event.target.classList.add('disabled')
         newGame.turn = false;
@@ -56,9 +49,9 @@ function preventChangingTokens(event) {
     }
 };
 
-function reenableBoxes(event) {
-    for (var i = 0; i < 9; i++){
-        boxes[i].classList.remove('disabled')
+function reenableBoxes() {
+    for (var i = 0; i < 9; i++) {
+        boxes[i].classList.remove('disabled');
     }
 };
 
@@ -68,22 +61,25 @@ function disableBoxes() {
 };
 
 function checkForWinOrDraw() {
+    newGame.checkForWin();
     if (newGame.checkForDraw() === true) {
-        turnTracker.innerText = `It's a draw!`
-        setTimeout(clearBoard, 2000);
-    } 
-     if (newGame.gameOver === true && newGame.turn === false) {
         board.classList.add('disabled');
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
-        turnTracker.innerText = `Chesty won!`
-        setTimeout(clearBoard, 2000)
+        turnTracker.innerText = `It's a draw!`;
+        setTimeout(clearBoard, 2000);
     } else if (newGame.gameOver === true && newGame.turn === true) {
-        board.classList.add('dsiabled';)
-        winsTrackerRight.innerText = `${newGame.player2.wins} games won`
-        winsTrackerLeft.innerText = `${newGame.player1.wins} games won`
-        turnTracker.innerText = `Izzy won!`
-         setTimeout(clearBoard, 2000)
+        board.classList.add('disabled');
+        localStorage.setItem('winsRight', player2.wins);
+        winsCounterLeft.innerText = `${player1.wins} Wins`;
+        winsCounterRight.innerText = `${player2.wins} Wins`;
+        turnTracker.innerText = `Izzy won!`;
+        setTimeout(clearBoard, 2000);
+    } else if (newGame.gameOver === true && newGame.turn === false) {
+        board.classList.add('disabled');
+        localStorage.setItem('winsLeft', player1.wins);
+        winsCounterRight.innerText = `${player2.wins} Wins`;
+        winsCounterLeft.innerText = `${player1.wins} Wins`;
+        turnTracker.innerText = `Chesty won!`;
+        setTimeout(clearBoard, 2000);
     }
 };
 
