@@ -55,11 +55,6 @@ function reenableBoxes() {
     }
 };
 
-function disableBoxes() {
-    for (var i = 0; i < 9; i++)
-    boxes[i].classList.add('disabled');
-};
-
 function checkForWinOrDraw() {
     newGame.checkForWin();
     if (newGame.checkForDraw() === true) {
