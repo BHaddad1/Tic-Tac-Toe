@@ -25,8 +25,8 @@ class Game {
     trackPlayerPositions(position) {
         if (this.gameOver === true) {
             this.board = [0, 0, 0,
-                0, 0, 0,
-                0, 0, 0];
+                        0, 0, 0,
+                        0, 0, 0];
         } else if(this.board[position] === 0 && this.turn) {
             this.board[position] = 1;
             this.player1.currentPositions.push(position);
