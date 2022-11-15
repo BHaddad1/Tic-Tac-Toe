@@ -19,7 +19,7 @@ Hang out with Chesty and Izzy and play some tic-Tac-Toe! Local storage will keep
 - Run 'open index.html'
 
 ### Preview of App: 
-[preview of the app](ezgif.com-gif-maker.gif)
+![Gif of preview](assets/previewgif.gif)
 
 ### Context
 - I worked on this project for five days and just began my sixth week in my first module at Turing. 
