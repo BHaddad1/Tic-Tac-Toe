@@ -1,4 +1,4 @@
-#Tic-Tac-Toe...with Cats!
+# Tic-Tac-Toe...with Cats!
 
 ### Learning Goals
 - Solidify and demonstrate your understanding of:
