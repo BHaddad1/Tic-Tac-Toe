@@ -6,7 +6,7 @@
     - DRY JavaScript
     - event delegation to handle similar event listeners
 - Understand the difference between the data model and how the data is displayed on the DOM
-Iterate through/filter DOM elements using for loops
+- Iterate through/filter DOM elements using for loops
 - Use your problem solving process to break down large problems, solve things step by step, and trust yourself to not rely on an outside “answer” to a logical challenge
 
 
@@ -20,7 +20,7 @@ Hang out with Chesty and Izzy and play some tic-Tac-Toe! Local storage will keep
 - cd into the repo.
 - Open the repo in your code editor.
 - Run 'open index.html'
-
+- Alternatively, use this link: https://bhaddad1.github.io/Tic-Tac-Toe/
 
 ### Preview of App: 
 ![Gif of preview](assets/previewgif.gif)
@@ -31,9 +31,9 @@ Hang out with Chesty and Izzy and play some tic-Tac-Toe! Local storage will keep
 
 
 ### Wins & Challenges
-Some challenges included: 
+- Some challenges included: 
     - Fixing the data model solely based on console logs.
     - Cleaning up bugs that were created in the DOM that were caused by not accessing the data model correctly in the main.js file.
-Some wins included: 
+- Some wins included: 
     - Building out a correct data model.
     - Being able to fuly digest the concept of utilizing the data model to lead the DOM.
