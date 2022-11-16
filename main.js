@@ -42,10 +42,10 @@ function updateToken() {
 function preventChangingTokens(event){ 
     if (event.target.innerText === player1.token) {
         event.target.classList.add('disabled')
-        newGame.turn = false;
+       
     } else if (event.target.innerText === player2.token) {
         event.target.classList.add('disabled')
-        newGame.turn = true;
+        
     }
 };
 
