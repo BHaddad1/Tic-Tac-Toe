@@ -80,10 +80,7 @@ function clearBoard() {
 
 function displayWinsOnLoad() {
   player1.wins = localStorage.getItem("winsLeft");
+  winsCounterLeft.innerText = `${player1.wins} Wins`;
   player2.wins = localStorage.getItem("winsRight");
-  if (player1.wins > 0) {
-    winsCounterLeft.innerText = `${player1.wins} Wins`;
-  } else if (player2.wins > 0) {
-    winsCounterRight.innerText = `${player2.wins} Wins`;
-  }
+  winsCounterRight.innerText = `${player2.wins} Wins`;
 }
