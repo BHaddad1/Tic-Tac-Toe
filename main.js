@@ -38,12 +38,6 @@ function updateToken() {
   }
 }
 
-function reenableBoxes() {
-  for (var i = 0; i < 9; i++) {
-    boxes[i].classList.remove("disabled");
-  }
-}
-
 function checkForWinOrDraw() {
   newGame.checkForWin();
   if (newGame.checkForDraw() === true) {
